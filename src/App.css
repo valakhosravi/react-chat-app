@@ -11,7 +11,3 @@ body {
     border-radius: 1000px;
     overflow: hidden;
 }
-
-.form-control {
-    outline: none!important;
-}

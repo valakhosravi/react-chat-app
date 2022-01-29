@@ -32,12 +32,6 @@ const messages = [{
     },
     {
         creationTime: "16 days ago",
-        users: [1, 2],
-        userId: 2,
-        contactId: 1
-    },
-    {
-        creationTime: "16 days ago",
         text: "Hi! I'm ok. And you?g",
         users: [1, 2],
         userId: 2,
@@ -80,6 +74,7 @@ const messages = [{
     },
     {
         creationTime: "16 days ago",
+        text: "How is the weather?",
         users: [1, 3],
         userId: 1,
         contactId: 3
@@ -99,10 +94,11 @@ const messages = [{
         contactId: 1
     },
     {
+        text: "Hello, you ok?",
         creationTime: "16 days ago",
         users: [1, 4],
         userId: 4,
-        contactId: 1
+        contactId: 4
     },
 ]
 

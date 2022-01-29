@@ -1,22 +1,38 @@
 import React, { Component, useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { actionCreators } from "../../state/index";
+import { fetchContacts } from '../../endpoints/index';
 
-export default function Contacts() {
+
+function Contacts() {
     const [contacts, setContacts] = useState([]);
     const [selectContactIndex, setSelectContactIndex] = useState(0);
 
     useEffect(async () => {
-        const url = 'http://localhost:3000/contacts';
-        const response = await fetch(url);
-        const decodeResponse = await response.json()
-        console.log(decodeResponse);
-        setContacts(decodeResponse);
+        setContacts(await fetchContacts());
     }, []);
+
+    useEffect(() => {
+        if (contacts.length > 0) {
+            changeSelectedContact(contacts[0]);
+        }
+    }, [contacts]);
+
+    const dispatch = useDispatch();
+    const { changeSelectedContact } = bindActionCreators(actionCreators, dispatch);
+
+    const onContactClick = (index, selectContact) => {
+        setSelectContactIndex(index);
+        changeSelectedContact(selectContact);
+    }
 
     return (
         <div className="p-3">
             {
                 contacts.map((contact, index) =>
-                    <div className={'p-3 pointer rounded mb-3 ' + (index == selectContactIndex ? 'bg-light ' : 'shadow-sm')}>
+                    <div className={'p-3 pointer rounded mb-3 ' + (index == selectContactIndex ? 'bg-light ' : 'shadow-sm')}
+                        key={index} onClick={() => onContactClick(index, contact)}>
                         {contact.name}
                     </div>
                 )
@@ -24,3 +40,5 @@ export default function Contacts() {
         </div>
     );
 }
+
+export default Contacts;

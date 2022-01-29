@@ -8,6 +8,7 @@ function App() {
     const { worker } = require('./mocks/browser')
     worker.start()
   }
+  
   return (
     <div className="App">
       <Header></Header>
